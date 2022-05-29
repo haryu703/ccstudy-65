@@ -1,0 +1,14 @@
+{
+  "name": "example",
+  "private": true,
+  "scripts": {
+    "cashc-060": "./node_modules/cashc-060/dist/main/cashc-cli.js",
+    "cashc-070": "./node_modules/cashc-070/dist/main/cashc-cli.js",
+    "native": "yarn cashc-070 mecenas_native.cash",
+    "preimage": "yarn cashc-060 mecenas_preimage.cash"
+  },
+  "devDependencies": {
+    "cashc-060": "npm:cashc@0.6.0",
+    "cashc-070": "npm:cashc@0.7.0"
+  }
+}

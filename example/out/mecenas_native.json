@@ -1,0 +1,47 @@
+{
+  "contractName": "Mecenas",
+  "constructorInputs": [
+    {
+      "name": "recipient",
+      "type": "bytes20"
+    },
+    {
+      "name": "funder",
+      "type": "bytes20"
+    },
+    {
+      "name": "pledge",
+      "type": "int"
+    },
+    {
+      "name": "period",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "receive",
+      "inputs": []
+    },
+    {
+      "name": "reclaim",
+      "inputs": [
+        {
+          "name": "pk",
+          "type": "pubkey"
+        },
+        {
+          "name": "s",
+          "type": "sig"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_4 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_3 OP_ROLL OP_CHECKSEQUENCEVERIFY OP_DROP 76a914 OP_SWAP OP_CAT 88ac OP_CAT OP_0 OP_OUTPUTBYTECODE OP_EQUALVERIFY e803 OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_4 OP_PICK OP_SUB OP_2 OP_PICK OP_SUB OP_DUP OP_5 OP_PICK OP_4 OP_PICK OP_ADD OP_LESSTHANOREQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_2OVER OP_SWAP OP_SUB OP_NUMEQUALVERIFY OP_ELSE OP_0 OP_OUTPUTVALUE OP_5 OP_PICK OP_NUMEQUALVERIFY OP_INPUTINDEX OP_UTXOBYTECODE OP_1 OP_OUTPUTBYTECODE OP_OVER OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_DROP OP_ENDIF OP_2DROP OP_2DROP OP_2DROP OP_1 OP_ELSE OP_4 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_4 OP_PICK OP_HASH160 OP_ROT OP_EQUALVERIFY OP_4 OP_ROLL OP_4 OP_ROLL OP_CHECKSIG OP_NIP OP_NIP OP_NIP OP_ENDIF",
+  "source": "// original: https://cashscript.org/docs/releases/migration-notes#v06-to-v07\n\ncontract Mecenas(bytes20 recipient, bytes20 funder, int pledge, int period) {\n    function receive() {\n        require(tx.age >= period);\n\n        // Check that the first output sends to the recipient\n        bytes25 recipientLockingBytecode = new LockingBytecodeP2PKH(recipient);\n        require(tx.outputs[0].lockingBytecode == recipientLockingBytecode);\n\n        // Calculate the value that's left\n        int minerFee = 1000;\n        int currentValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = currentValue - pledge - minerFee;\n\n        // If there is not enough left for *another* pledge after this one,\n        // we send the remainder to the recipient. Otherwise we send the\n        // remainder to the recipient and the change back to the contract\n        if (changeValue <= pledge + minerFee) {\n            require(tx.outputs[0].value == currentValue - minerFee);\n        } else {\n            require(tx.outputs[0].value == pledge);\n            bytes changeBytecode = tx.inputs[this.activeInputIndex].lockingBytecode;\n            require(tx.outputs[1].lockingBytecode == changeBytecode);\n            require(tx.outputs[1].value == changeValue);\n        }\n    }\n\n    function reclaim(pubkey pk, sig s) {\n        require(hash160(pk) == funder);\n        require(checkSig(s, pk));\n    }\n}\n",
+  "compiler": {
+    "name": "cashc",
+    "version": "0.7.0"
+  },
+  "updatedAt": "2022-05-29T01:16:49.167Z"
+}
