@@ -26,10 +26,11 @@
 <p>2022年5月15日にBitcoin Cashはハードフォークによるアップグレードを行った</p>
 <ul>
 <li>ハードフォークによるアップグレードは2020年11月15日以来</li>
+<li>2021年5月にはハードフォークを伴わないアップグレードがあった</li>
 </ul>
 </li>
 <li>
-<p>Bitcoin Scriptのランタイムに関する下記の2点が更新される。</p>
+<p>Bitcoin Scriptのランタイムに関する下記の2点が更新される</p>
 <ul>
 <li><a href="https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md">CHIP-2021-02: Native Introspection Opcodes</a><br />
 トランザクションの情報を取得するOpCodeを追加する</li>
@@ -39,6 +40,9 @@
 </li>
 <li>
 <p>CHIP(Cash Improvement Proposal)はBitcoin Cashのネットワークに関する変更案</p>
+<ul>
+<li>CHIPはBIPに比べスコープが広いらしい</li>
+</ul>
 </li>
 </ul>
 </section>
@@ -65,12 +69,12 @@
 <tr>
 <td>OP_INPUTINDEX</td>
 <td><code>0xc0</code> (192)</td>
-<td>評価中のinputのindexをスタックにプッシュする。</td>
+<td>評価中のinputのindexをスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_ACTIVEBYTECODE</td>
 <td><code>0xc1</code> (193)</td>
-<td>評価中のbytecodeをスタックにプッシュする。もし<code>OP_CODESEPARATOR</code>が実行されていれば最後に実行されたところから後の部分がプッシュされる。P2SHの場合はredeem script、それ以外ならlocking scriptがプッシュされることになる。</td>
+<td>評価中のbytecodeをスタックにプッシュする。もし<code>OP_CODESEPARATOR</code>が実行されていれば最後に実行されたところから後の部分がプッシュされる。P2SHの場合はredeem script、それ以外ならlocking scriptがプッシュされることになる</td>
 </tr>
 </tbody>
 </table>
@@ -89,22 +93,22 @@
 <tr>
 <td>OP_TXVERSION</td>
 <td><code>0xc2</code> (194)</td>
-<td>トランザクションのバージョンをスタックにプッシュする。</td>
+<td>トランザクションのバージョンをスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_TXINPUTCOUNT</td>
 <td><code>0xc3</code> (195)</td>
-<td>トランザクションのinputの数をスタックにプッシュする。</td>
+<td>トランザクションのinputの数をスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_TXOUTPUTCOUNT</td>
 <td><code>0xc4</code> (196)</td>
-<td>トランザクションのoutputの数をスタックにプッシュする。</td>
+<td>トランザクションのoutputの数をスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_TXLOCKTIME</td>
 <td><code>0xc5</code> (197)</td>
-<td>トランザクションのlocktimeをスタックにプッシュする。</td>
+<td>トランザクションのlocktimeをスタックにプッシュする</td>
 </tr>
 </tbody>
 </table>
@@ -123,17 +127,17 @@
 <tr>
 <td>OP_UTXOVALUE</td>
 <td><code>0xc6</code> (198)</td>
-<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOの金額をsatoshi単位でスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOの金額をsatoshi単位でスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_UTXOBYTECODE</td>
 <td><code>0xc7</code> (199)</td>
-<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのlocking scriptをスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのlocking scriptをスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_OUTPOINTTXHASH</td>
 <td><code>0xc8</code> (200)</td>
-<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのTXIDをスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのTXIDをスタックにプッシュする</td>
 </tr>
 </tbody>
 </table>
@@ -152,17 +156,17 @@
 <tr>
 <td>OP_OUTPOINTINDEX</td>
 <td><code>0xc9</code> (201)</td>
-<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのindexをスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、消費するUTXOのindexをスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_INPUTBYTECODE</td>
 <td><code>0xca</code> (202)</td>
-<td>スタックの先頭をinputのindexとしてポップし、そのinputのunlocking scriptをスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、そのinputのunlocking scriptをスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_INPUTSEQUENCENUMBER</td>
 <td><code>0xcb</code> (203)</td>
-<td>スタックの先頭をinputのindexとしてポップし、そのinputのsequence numberをスタックにプッシュする。</td>
+<td>スタックの先頭をinputのindexとしてポップし、そのinputのsequence numberをスタックにプッシュする</td>
 </tr>
 </tbody>
 </table>
@@ -181,12 +185,12 @@
 <tr>
 <td>OP_OUTPUTVALUE</td>
 <td><code>0xcc</code> (204)</td>
-<td>スタックの先頭をoutputのindexとしてポップし、そのoutputの金額をsatoshi単位でスタックにプッシュする。</td>
+<td>スタックの先頭をoutputのindexとしてポップし、そのoutputの金額をsatoshi単位でスタックにプッシュする</td>
 </tr>
 <tr>
 <td>OP_OUTPUTBYTECODE</td>
 <td><code>0xcd</code> (205)</td>
-<td>スタックの先頭をoutputのindexとしてポップし、そのoutputのlocking scriptをスタックにプッシュする。</td>
+<td>スタックの先頭をoutputのindexとしてポップし、そのoutputのlocking scriptをスタックにプッシュする</td>
 </tr>
 </tbody>
 </table>
