@@ -16,13 +16,15 @@ paginate: true
 ## 今回のハードフォークの概要
 - 2022年5月15日にBitcoin Cashはハードフォークによるアップグレードを行った
   - ハードフォークによるアップグレードは2020年11月15日以来
-- Bitcoin Scriptのランタイムに関する下記の2点が更新される。
+  - 2021年5月にはハードフォークを伴わないアップグレードがあった
+- Bitcoin Scriptのランタイムに関する下記の2点が更新される
   - [CHIP-2021-02: Native Introspection Opcodes](https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Add-Native-Introspection-Opcodes.md)
     トランザクションの情報を取得するOpCodeを追加する
   - [CHIP-2021-03: Bigger Script Integers](https://gitlab.com/GeneralProtocols/research/chips/-/blob/master/CHIP-2021-02-Bigger-Script-Integers.md)
     扱える整数を32-bitから64-bitに拡張し、`OP_MUL`を再有効化する
 
 - CHIP(Cash Improvement Proposal)はBitcoin Cashのネットワークに関する変更案
+  - CHIPはBIPに比べスコープが広いらしい
 
 ---
 
@@ -38,8 +40,8 @@ paginate: true
 
 | Operation | Codepoint | Description |
 | - | - | - |
-| OP_INPUTINDEX     | `0xc0` (192) | 評価中のinputのindexをスタックにプッシュする。 |
-| OP_ACTIVEBYTECODE | `0xc1` (193) | 評価中のbytecodeをスタックにプッシュする。もし`OP_CODESEPARATOR`が実行されていれば最後に実行されたところから後の部分がプッシュされる。P2SHの場合はredeem script、それ以外ならlocking scriptがプッシュされることになる。 |
+| OP_INPUTINDEX     | `0xc0` (192) | 評価中のinputのindexをスタックにプッシュする |
+| OP_ACTIVEBYTECODE | `0xc1` (193) | 評価中のbytecodeをスタックにプッシュする。もし`OP_CODESEPARATOR`が実行されていれば最後に実行されたところから後の部分がプッシュされる。P2SHの場合はredeem script、それ以外ならlocking scriptがプッシュされることになる |
 
 ---
 
@@ -47,10 +49,10 @@ paginate: true
 
 | Operation | Codepoint | Description |
 | - | - | - |
-| OP_TXVERSION      | `0xc2` (194) | トランザクションのバージョンをスタックにプッシュする。 |
-| OP_TXINPUTCOUNT   | `0xc3` (195) | トランザクションのinputの数をスタックにプッシュする。 |
-| OP_TXOUTPUTCOUNT  | `0xc4` (196) | トランザクションのoutputの数をスタックにプッシュする。 |
-| OP_TXLOCKTIME     | `0xc5` (197) | トランザクションのlocktimeをスタックにプッシュする。 |
+| OP_TXVERSION      | `0xc2` (194) | トランザクションのバージョンをスタックにプッシュする |
+| OP_TXINPUTCOUNT   | `0xc3` (195) | トランザクションのinputの数をスタックにプッシュする |
+| OP_TXOUTPUTCOUNT  | `0xc4` (196) | トランザクションのoutputの数をスタックにプッシュする |
+| OP_TXLOCKTIME     | `0xc5` (197) | トランザクションのlocktimeをスタックにプッシュする |
 
 ---
 
@@ -58,9 +60,9 @@ paginate: true
 
 | Operation | Codepoint | Description |
 | - | - | - |
-| OP_UTXOVALUE           | `0xc6` (198) | スタックの先頭をinputのindexとしてポップし、消費するUTXOの金額をsatoshi単位でスタックにプッシュする。 |
-| OP_UTXOBYTECODE        | `0xc7` (199) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのlocking scriptをスタックにプッシュする。 |
-| OP_OUTPOINTTXHASH      | `0xc8` (200) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのTXIDをスタックにプッシュする。 |
+| OP_UTXOVALUE           | `0xc6` (198) | スタックの先頭をinputのindexとしてポップし、消費するUTXOの金額をsatoshi単位でスタックにプッシュする |
+| OP_UTXOBYTECODE        | `0xc7` (199) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのlocking scriptをスタックにプッシュする |
+| OP_OUTPOINTTXHASH      | `0xc8` (200) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのTXIDをスタックにプッシュする |
 
 ---
 
@@ -68,9 +70,9 @@ paginate: true
 
 | Operation | Codepoint | Description |
 | - | - | - |
-| OP_OUTPOINTINDEX       | `0xc9` (201) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのindexをスタックにプッシュする。 |
-| OP_INPUTBYTECODE       | `0xca` (202) | スタックの先頭をinputのindexとしてポップし、そのinputのunlocking scriptをスタックにプッシュする。 |
-| OP_INPUTSEQUENCENUMBER | `0xcb` (203) | スタックの先頭をinputのindexとしてポップし、そのinputのsequence numberをスタックにプッシュする。 |
+| OP_OUTPOINTINDEX       | `0xc9` (201) | スタックの先頭をinputのindexとしてポップし、消費するUTXOのindexをスタックにプッシュする |
+| OP_INPUTBYTECODE       | `0xca` (202) | スタックの先頭をinputのindexとしてポップし、そのinputのunlocking scriptをスタックにプッシュする |
+| OP_INPUTSEQUENCENUMBER | `0xcb` (203) | スタックの先頭をinputのindexとしてポップし、そのinputのsequence numberをスタックにプッシュする |
 
 ---
 
@@ -78,8 +80,8 @@ paginate: true
 
 | Operation | Codepoint | Description |
 | - | - | - |
-| OP_OUTPUTVALUE         | `0xcc` (204) | スタックの先頭をoutputのindexとしてポップし、そのoutputの金額をsatoshi単位でスタックにプッシュする。 |
-| OP_OUTPUTBYTECODE      | `0xcd` (205) | スタックの先頭をoutputのindexとしてポップし、そのoutputのlocking scriptをスタックにプッシュする。 |
+| OP_OUTPUTVALUE         | `0xcc` (204) | スタックの先頭をoutputのindexとしてポップし、そのoutputの金額をsatoshi単位でスタックにプッシュする |
+| OP_OUTPUTBYTECODE      | `0xcd` (205) | スタックの先頭をoutputのindexとしてポップし、そのoutputのlocking scriptをスタックにプッシュする |
 
 ---
 
